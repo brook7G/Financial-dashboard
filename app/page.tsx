@@ -4,14 +4,8 @@ import Link from "next/link";
 import styles from "@/app/ui/home.module.css";
 import { lusitana } from "@/app/ui/fonts";
 import Image from "next/image";
-import { createClient } from "@/utilis/supabase/server";
-import { cookies } from "next/headers";
 
-export default async function Page() {
-  const cookieStore = cookies();
-  const supabase = await createClient(cookieStore);
-
-  const { data: todos } = await supabase.from("todos").select();
+export default function Page() {
   return (
     <main className="flex min-h-screen flex-col p-6">
       <div className={styles.shape}>
@@ -55,11 +49,6 @@ export default async function Page() {
           />
         </div>
       </div>
-      <ul>
-        {todos?.map((todo) => (
-          <li>{todo}</li>
-        ))}
-      </ul>
     </main>
   );
 }
